@@ -1,0 +1,88 @@
+$themecolor: #5197f8;
+$whitecolor: #fff;
+//字体颜色
+$themefontcolor: #333;
+$redcolor: #ff6161;
+
+$minorfontcolor: #999;
+$divisioncolor: #ddd;
+//背景色
+$backcolor: #eee;
+//圆角值
+$comradius: 7.5px;
+//间距
+$marginB: 20px;
+$marginT: 10px;
+//字体
+$fontsize24: 24px;
+$fontsize18: 18px;
+$fontsize16: 16px;
+$fontsize14: 14px;
+$fontsize12: 12px;
+//边框线
+$borderB: solid 1px $divisioncolor;
+@mixin link-colors($normal, $hover, $visited) {
+  color: $normal;
+  &:hover {
+    color: $hover;
+  }
+  &:visited {
+    color: $visited;
+  }
+}
+
+// flex布局
+@mixin flexLayout($justify: flex-start, $align: center, $direction: row) {
+  display: flex;
+  justify-content: $justify;
+  align-items: $align;
+  flex-direction: $direction;
+  display: -webkit-flex;
+  -webkit-justify-content: $justify;
+  -webkit-align-items: $align;
+  -webkit-flex-direction: $direction;
+}
+
+// 清除浮动
+@mixin clearfix() {
+  zoom: 1;
+  &:before,
+  &:after {
+    content: '';
+    display: table;
+  }
+  &:after {
+    clear: both;
+    visibility: hidden;
+    font-size: 0;
+    height: 0;
+  }
+}
+
+//单行文本超出显示
+@mixin ellipsis($w: auto) {
+  width: $w;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  word-wrap: normal;
+}
+
+// 多行文本超出显示省略号
+@mixin ellipsisLn($line) {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: $line;
+  word-break: break-all;
+}
+
+@mixin listChange() {
+  transform: scale(1.01);
+  box-shadow: 0 0 14px 7px #e6e7ec;
+}
+
+@mixin imgChange() {
+  transform: scale(1.08);
+}
