@@ -245,7 +245,7 @@
                 )
             }
         },
-        created() {
+        mounted() {
             this.consultantIntroUrl = window.sessionStorage.getItem('consultantIntroUrl');
             this.init();
             api.initFilter().then(

@@ -78,13 +78,7 @@ module.exports = {
   ** Global CSS
   */
     css: [
-<<<<<<< HEAD
-        'element-ui/lib/theme-chalk/index.css',
-        { src: '~assets/comm.scss', lang: 'scss' },
-        // { src: 'element-ui/lib/theme-chalk/index.css', lang: 'scss' }
-=======
         { src: '~assets/comm.scss', lang: 'scss' }
->>>>>>> fc74975bc20e6961f3b342408be486cd74c8e97d
         // { src: '~assets/comm.scss', lang: 'scss' }
     ],
     /*

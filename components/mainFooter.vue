@@ -32,7 +32,7 @@
         data() {
             return {};
         },
-        created() {
+        mounted() {
         }
     };
 </script>

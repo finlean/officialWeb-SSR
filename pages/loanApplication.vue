@@ -182,7 +182,7 @@
                 )
             }
         },
-        created() {
+        mounted() {
             this.init();
             this.prodListIntroUrl = window.sessionStorage.getItem('prodListIntroUrl');
         }

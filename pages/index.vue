@@ -128,7 +128,7 @@
                 }
             },
         },
-        created() {
+        mounted() {
             api.getimg().then(
                 res => {
                     res.body.forEach(val => {

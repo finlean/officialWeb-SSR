@@ -143,7 +143,7 @@
                     ;
             }
         },
-        created() {
+        mounted() {
             this.newsListIntroUrl = window.sessionStorage.getItem('newsListIntroUrl');
             //           新闻类型tab
             api.newsType({

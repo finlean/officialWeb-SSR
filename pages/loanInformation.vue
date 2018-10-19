@@ -63,7 +63,7 @@
                 window.location.href = 'informationDetails.html?id=' + newsId;
             }
         },
-        created() {
+        mounted() {
             this.loading = true;
             let listData = {
                 page: '1',
