@@ -20,7 +20,8 @@ module.exports = {
                 content: pkg.description
             }
         ],
-        link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
+        link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+            { rel: 'stylesheet', href: 'https://cdnjs.cloudflare.com/ajax/libs/element-ui/2.4.7/theme-chalk/index.css' }],
         script: [
             {
                 src:
@@ -77,9 +78,13 @@ module.exports = {
   ** Global CSS
   */
     css: [
+<<<<<<< HEAD
         'element-ui/lib/theme-chalk/index.css',
         { src: '~assets/comm.scss', lang: 'scss' },
         // { src: 'element-ui/lib/theme-chalk/index.css', lang: 'scss' }
+=======
+        { src: '~assets/comm.scss', lang: 'scss' }
+>>>>>>> fc74975bc20e6961f3b342408be486cd74c8e97d
         // { src: '~assets/comm.scss', lang: 'scss' }
     ],
     /*
