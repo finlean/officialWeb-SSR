@@ -1,5 +1,4 @@
 const pkg = require('./package')
-const webpack = require('webpack')
 
 module.exports = {
     mode: 'universal',
@@ -79,10 +78,10 @@ module.exports = {
   */
     css: [
         'element-ui/lib/theme-chalk/index.css',
-        { src: '~assets/comm.scss', lang: 'scss' }
+        { src: '~assets/comm.scss', lang: 'scss' },
+        // { src: 'element-ui/lib/theme-chalk/index.css', lang: 'scss' }
         // { src: '~assets/comm.scss', lang: 'scss' }
     ],
-
     /*
   ** Plugins to load before mounting the App
   */
