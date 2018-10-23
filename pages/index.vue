@@ -3,7 +3,7 @@
         <mainHeader></mainHeader>
         <el-carousel arrow="never" class="home-swiper" v-if="swiperImgs.length">
             <el-carousel-item v-for="(swiperImg,index) in swiperImgs" :key="index">
-                <img :src="'https://t.finlean.com/'+swiperImg.bannerUrl" @click="jumpPage(swiperImg)">
+                <img :src="'https://www.jycash.cn/'+swiperImg.bannerUrl" @click="jumpPage(swiperImg)">
             </el-carousel-item>
         </el-carousel>
         <div class="home-counselor">
@@ -12,11 +12,11 @@
         <div style="width: 100%; background-color: #ffffff">
             <div class="home-con">
                 <div class="home-confirstimg" v-if='titleImg.bannerUrl'>
-                    <img class="amplification" :src="'https://t.finlean.com/'+titleImg.bannerUrl" ondragstart="return false;" onselectstart="return false;" @click="jumpPage(titleImg)">
+                    <img class="amplification" :src="'https://www.jycash.cn/'+titleImg.bannerUrl" ondragstart="return false;" onselectstart="return false;" @click="jumpPage(titleImg)">
                 </div>
                 <div class="home-conother" v-if="conImgs.length">
                     <div class="grid-content" v-for="(conImg,index) in conImgs" :key="index">
-                        <img :src="'https://t.finlean.com/'+conImg.bannerUrl" @click="jumpPage(conImg)">
+                        <img :src="'https://www.jycash.cn/'+conImg.bannerUrl" @click="jumpPage(conImg)">
                     </div>
                 </div>
             </div>

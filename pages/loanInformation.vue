@@ -11,7 +11,7 @@
             <div class="loanInformation-leftcon" v-loading="loading" v-if="showPage">
                 <div class="Information-con" v-for="(information,index) in informationList" :key="index">
                     <div>
-                        <img :src="'https://t.finlean.com/'+information.imgPath" alt="">
+                        <img :src="'https://www.jycash.cn/'+information.imgPath" alt="">
                     </div>
                     <div>
                         <p v-text="information.title"></p>

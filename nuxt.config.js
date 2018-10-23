@@ -7,7 +7,8 @@ module.exports = {
   ** Headers of the page
   */
     head: {
-        title: pkg.name,
+        title:
+            '上海吉帑贷款,上海吉帑金融,上海吉帑金融信息服务有限公司,成都贷款,个人贷款产品,贷款额度高,利率低,放款快-吉帑金服',
         meta: [
             { charset: 'utf-8' },
             {
