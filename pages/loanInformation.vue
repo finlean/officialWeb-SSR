@@ -9,7 +9,7 @@
         <mainHeader></mainHeader>
         <div class="loanInformation-con">
             <div class="loanInformation-leftcon" v-loading="loading" v-if="showPage">
-                <div class="Information-con" v-for="(information,index) in informationList">
+                <div class="Information-con" v-for="(information,index) in informationList" :key="index">
                     <div>
                         <img :src="'https://t.finlean.com/'+information.imgPath" alt="">
                     </div>
@@ -31,11 +31,11 @@
     </div>
 </template>
 <script>
-    import mainHeader from '../components/mainHeader.vue';
-    import mainFooter from '../components/mainFooter.vue';
-    import { Carousel } from 'element-ui';
-    import api from '../middleware/api.js';
-    import statusCodeManage from '../middleware/statusCodeManage';
+    import mainHeader from '../components/mainHeader.vue'
+    import mainFooter from '../components/mainFooter.vue'
+    import { Carousel } from 'element-ui'
+    import api from '../middleware/api.js'
+    import statusCodeManage from '../middleware/statusCodeManage'
 
     export default {
         name: 'loanInformation',
@@ -50,142 +50,161 @@
                 radio: 1,
                 informationList: null,
                 showPage: false,
-                showNone: false,
-            };
+                showNone: false
+            }
+        },
+        head() {
+            return {
+                title:
+                    '贷款理财资讯平台,成都贷款,个人贷款,企业贷款,抵押贷款,贷款信息-吉帑金服',
+                meta: [
+                    {
+                        hid: 'keywords',
+                        name: 'keywords',
+                        content:
+                            '成都贷款,无抵押贷款,抵押贷款,小额贷款,信用贷款,企业贷款,贷款网站'
+                    },
+                    {
+                        hid: 'description',
+                        name: 'description',
+                        content:
+                            '教您如何贷款,如何贷款买车及如何贷款买房更划算,更多贷款常见问题和最新贷款利率等信息,帮您快速找到贷款'
+                    }
+                ]
+            }
         },
         methods: {
-            checkbox() {
-            },
+            checkbox() {},
             seeMore() {
-                window.location.href = 'informationList.html';
+                window.location.href = 'informationList.html'
             },
             toDetail(newsId) {
-                window.location.href = 'informationDetails.html?id=' + newsId;
+                window.location.href = 'informationDetails.html?id=' + newsId
             }
         },
         mounted() {
-            this.loading = true;
+            this.loading = true
             let listData = {
                 page: '1',
-                rows: '10',
-            };
+                rows: '10'
+            }
             api.newsList(listData).then(
                 res => {
-                    this.informationList = res.body.items;
+                    this.informationList = res.body.items
                     if (res.body.items.length > 0) {
-                        this.showPage = true;
+                        this.showPage = true
                     } else {
-                        this.showNone = true;
+                        this.showNone = true
                     }
-                    this.loading = false;
+                    this.loading = false
                 },
                 err => {
-                    this.loading = false;
-                    statusCodeManage.showTipOfStatuCode(err, this);
+                    this.loading = false
+                    statusCodeManage.showTipOfStatuCode(err, this)
                 }
-            );
+            )
         }
-    };
+    }
 </script>
 <style lang="scss">
-.loanInformation-page {
-    background-color: $backcolor;
+    .loanInformation-page {
+        background-color: $backcolor;
 
-    margin-top: 90px;
-    .loanInformation-con {
-        width: 1180px;
-        min-height: 690px;
-        margin: 0 auto;
-        display: flex;
-        justify-content: space-between;
-        .blank {
-            width: 100%;
-            text-align: center;
-            height: 12px;
-            padding: 20px 0;
-            line-height: 12px;
-            background-color: $whitecolor;
-            margin: 0 auto;
-            color: $themecolor;
-        }
-    }
-    .loanInformation-leftcon {
-        .Information-conpag {
-            height: 100px;
-            color: $themecolor;
-            cursor: pointer;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background-color: $whitecolor;
-            font-size: $fontsize18;
-        }
-        .Information-con {
+        margin-top: 90px;
+        .loanInformation-con {
             width: 1180px;
-            box-sizing: border-box;
-            @include flexLayout(center, center, row);
-            padding: 30px 20px;
-            border-bottom: 1px solid $divisioncolor;
-            background-color: $whitecolor;
+            min-height: 690px;
             margin: 0 auto;
-            transition: all 0.3s;
-            &:hover {
-                cursor: pointer;
-                @include listChange();
+            display: flex;
+            justify-content: space-between;
+            .blank {
+                width: 100%;
+                text-align: center;
+                height: 12px;
+                padding: 20px 0;
+                line-height: 12px;
+                background-color: $whitecolor;
+                margin: 0 auto;
+                color: $themecolor;
             }
-            div {
-                margin-right: 20px;
-                &:first-child {
-                    width: 320px;
-                    height: 180px;
-                    img {
-                        width: 100%;
-                        height: 100%;
-                    }
+        }
+        .loanInformation-leftcon {
+            .Information-conpag {
+                height: 100px;
+                color: $themecolor;
+                cursor: pointer;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                background-color: $whitecolor;
+                font-size: $fontsize18;
+            }
+            .Information-con {
+                width: 1180px;
+                box-sizing: border-box;
+                @include flexLayout(center, center, row);
+                padding: 30px 20px;
+                border-bottom: 1px solid $divisioncolor;
+                background-color: $whitecolor;
+                margin: 0 auto;
+                transition: all 0.3s;
+                &:hover {
+                    cursor: pointer;
+                    @include listChange();
                 }
-                &:nth-child(n + 2) {
-                    width: 780px;
-                    height: 180px;
-                    p {
-                        &:first-child {
-                            margin-bottom: 30px;
-                            color: $themefontcolor;
-                            font-size: $fontsize18;
-                            padding-top: 10px;
-                            @include ellipsis(100%);
+                div {
+                    margin-right: 20px;
+                    &:first-child {
+                        width: 320px;
+                        height: 180px;
+                        img {
+                            width: 100%;
+                            height: 100%;
                         }
                     }
-                    .Informationtext {
-                        color: $minorfontcolor;
+                    &:nth-child(n + 2) {
+                        width: 780px;
+                        height: 180px;
+                        p {
+                            &:first-child {
+                                margin-bottom: 30px;
+                                color: $themefontcolor;
+                                font-size: $fontsize18;
+                                padding-top: 10px;
+                                @include ellipsis(100%);
+                            }
+                        }
+                        .Informationtext {
+                            color: $minorfontcolor;
+                            font-size: $fontsize16;
+                            margin-bottom: 30px;
+                            @include ellipsisLn(2);
+                        }
+                    }
+                    .el-button {
+                        width: 120px;
+                        color: $whitecolor;
                         font-size: $fontsize16;
-                        margin-bottom: 30px;
-                        @include ellipsisLn(2);
+                        background-color: $themecolor;
                     }
                 }
-                .el-button {
-                    width: 120px;
-                    color: $whitecolor;
+                .Informationtext {
                     font-size: $fontsize16;
-                    background-color: $themecolor;
+                    @include ellipsisLn(2);
                 }
             }
-            .Informationtext {
-                font-size: $fontsize16;
-                @include ellipsisLn(2);
+            .loanInformation-contitle {
+                width: 820px;
+                height: 20px;
+                padding: 20px;
+                background-color: $whitecolor;
+                margin-bottom: 10px;
             }
         }
-        .loanInformation-contitle {
-            width: 820px;
-            height: 20px;
-            padding: 20px;
-            background-color: $whitecolor;
-            margin-bottom: 10px;
+        .loanInformation-rightcon {
+            width: 300px;
+            height: 100px;
+            background-color: red;
         }
     }
-    .loanInformation-rightcon {
-        width: 300px;
-        height: 100px;
-        background-color: red;
-    }
-}
 </style>

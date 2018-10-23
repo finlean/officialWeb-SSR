@@ -77,17 +77,37 @@
 </template>
 
 <script>
-    import mainFooter from '../components/mainFooter.vue';
-    import mainHeader from '../components/mainHeader.vue';
-    import consultant from '../components/contactConsultant.vue';
-    import api from '../middleware/api.js';
-    import statusCodeManage from '../middleware/statusCodeManage';
+    import mainFooter from '../components/mainFooter.vue'
+    import mainHeader from '../components/mainHeader.vue'
+    import consultant from '../components/contactConsultant.vue'
+    import api from '../middleware/api.js'
+    import statusCodeManage from '../middleware/statusCodeManage'
     export default {
         name: 'app',
         components: {
             mainFooter,
             mainHeader,
             consultant
+        },
+        head() {
+            return {
+                title:
+                    '成都贷款,个人贷款,网上贷款,信用卡申请,贷款一站式金融服务平台-吉帑金服',
+                meta: [
+                    {
+                        hid: 'keywords',
+                        name: 'keywords',
+                        content:
+                            '贷款,成都贷款,小额贷款,个人信用贷款,个人住房抵押贷款,车辆抵押贷款,网上贷款,贷款平台'
+                    },
+                    {
+                        hid: 'description',
+                        name: 'description',
+                        content:
+                            '上海吉帑专注于为个人和企业提供各类融资解决方案,个人贷款,小额贷款,银行贷款,汽车贷款,住房贷款,抵押贷款,无抵押贷款和创业贷款等贷款咨询服务'
+                    }
+                ]
+            }
         },
         data() {
             return {
@@ -97,201 +117,223 @@
                 titleImg: {
                     bannerUrl: ''
                 },
-                conImgs: [],
+                conImgs: []
             }
         },
         methods: {
             jumpPage(item) {
                 switch (item.jumpType) {
                     case 0:
-                        break;
+                        break
                     case 1:
                         //站内跳转
-                        let jumpUrl = JSON.parse(item.jumpUrl);
+                        let jumpUrl = JSON.parse(item.jumpUrl)
                         if (jumpUrl.route === 'productDetails') {
-                            window.location.href = `productDetails.html?prodId=${jumpUrl.id}`;
-                            break;
+                            window.location.href = `productDetails.html?prodId=${
+                                jumpUrl.id
+                            }`
+                            break
                         } else if (jumpUrl.route === 'informationDetails') {
-                            window.location.href = `informationDetails.html?id=${jumpUrl.id}`;
-                            break;
+                            window.location.href = `informationDetails.html?id=${
+                                jumpUrl.id
+                            }`
+                            break
                         } else {
-                            window.location.href = `${jumpUrl.route}.html`;
-                            break;
+                            window.location.href = `${jumpUrl.route}.html`
+                            break
                         }
                     case 2:
                         //站外跳转
-                        window.location.href = item.jumpUrl;
-                        break;
+                        window.location.href = item.jumpUrl
+                        break
                     default:
                         //....
-                        break;
+                        break
                 }
-            },
+            }
         },
         mounted() {
             api.getimg().then(
                 res => {
                     res.body.forEach(val => {
-                        let bannerType = val.bannerType;
+                        let bannerType = val.bannerType
                         if (bannerType == 0) {
-                            window.sessionStorage.setItem('qrCodeUrl', val.bannerUrl);
+                            window.sessionStorage.setItem(
+                                'qrCodeUrl',
+                                val.bannerUrl
+                            )
                         } else if (bannerType == 1) {
-                            this.swiperImgs.push(val);
+                            this.swiperImgs.push(val)
                         } else if (bannerType == 2) {
-                            this.titleImg = val;
+                            this.titleImg = val
                         } else if (bannerType == 3) {
-                            this.conImgs.push(val);
+                            this.conImgs.push(val)
                         } else if (bannerType == 4) {
-                            window.sessionStorage.setItem('prodListIntroUrl', val.bannerUrl);
+                            window.sessionStorage.setItem(
+                                'prodListIntroUrl',
+                                val.bannerUrl
+                            )
                         } else if (bannerType == 5) {
-                            window.sessionStorage.setItem('prodDetailIntroUrl', val.bannerUrl);
+                            window.sessionStorage.setItem(
+                                'prodDetailIntroUrl',
+                                val.bannerUrl
+                            )
                         } else if (bannerType == 6) {
-                            window.sessionStorage.setItem('consultantIntroUrl', val.bannerUrl);
+                            window.sessionStorage.setItem(
+                                'consultantIntroUrl',
+                                val.bannerUrl
+                            )
                         } else if (bannerType == 7) {
-                            window.sessionStorage.setItem('newsListIntroUrl', val.bannerUrl);
+                            window.sessionStorage.setItem(
+                                'newsListIntroUrl',
+                                val.bannerUrl
+                            )
                         } else if (bannerType == 8) {
-                            window.sessionStorage.setItem('newsDetailsIntroUrl', val.bannerUrl);
+                            window.sessionStorage.setItem(
+                                'newsDetailsIntroUrl',
+                                val.bannerUrl
+                            )
                         }
-                    });
+                    })
                 },
                 err => {
-                    statusCodeManage.showTipOfStatuCode(err, this);
+                    statusCodeManage.showTipOfStatuCode(err, this)
                 }
-            );
+            )
         }
     }
 </script>
 
 <style lang='scss'>
-.home-page {
-    min-height: 640px;
-    .icon-wenti {
-        cursor: pointer;
-    }
-    img {
-        cursor: pointer;
-    }
-    /*鼠标移动图片放大*/
-    .amplification {
-        transition: all 0.5s;
-        &:hover {
-            transform: scale(1.08);
+    .home-page {
+        min-height: 640px;
+        .icon-wenti {
+            cursor: pointer;
         }
-    }
+        img {
+            cursor: pointer;
+        }
+        /*鼠标移动图片放大*/
+        .amplification {
+            transition: all 0.5s;
+            &:hover {
+                transform: scale(1.08);
+            }
+        }
 
-    .el-carousel__button {
-        width: 8px;
-        height: 8px;
-        border-radius: 50%;
-    }
-    position: relative;
-    .home-swiper {
-        .el-carousel__container {
-            min-width: 1100px;
-            height: 480px;
-            img {
-                width: 100%;
-                height: 100%;
-            }
+        .el-carousel__button {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
         }
-    }
-    .home-counselor {
-        @include flexLayout(flex-end, center, row);
-        /*min-width: 1180px;*/
-        height: 360px;
-        position: absolute;
-        top: 85px;
-        right: 50%;
-        transform: translateX(590px);
-        z-index: 10;
-    }
-    .home-con {
-        width: 1180px;
-        margin: 0 auto;
-        padding-top: $marginB;
-        background-color: $whitecolor;
-        .home-confirstimg {
-            width: 100%;
-            height: 420px;
-            margin-bottom: $marginB;
-            overflow: hidden;
-            img {
-                width: 100%;
-            }
-        }
-        .home-conother {
-            width: 100%;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-        }
-        .grid-content {
-            width: 580px;
-            height: 326px;
-            margin-bottom: $marginB;
-            overflow: hidden;
-            img {
-                transition: 0.5s;
-                width: 100%;
-                height: 100%;
-                &:hover {
-                    @include imgChange();
+        position: relative;
+        .home-swiper {
+            .el-carousel__container {
+                min-width: 1100px;
+                height: 480px;
+                img {
+                    width: 100%;
+                    height: 100%;
                 }
             }
         }
-    }
-    .home-footswiper {
-        width: 100%;
-        height: 400px;
-        background-color: #ffffff;
-        .el-carousel__container {
-            width: 902px;
-            height: 240px !important;
-            text-align: center;
-            margin: 0 auto;
+        .home-counselor {
+            @include flexLayout(flex-end, center, row);
+            /*min-width: 1180px;*/
+            height: 360px;
+            position: absolute;
+            top: 85px;
+            right: 50%;
+            transform: translateX(590px);
+            z-index: 10;
         }
-        .el-carousel__item {
-            width: 902px;
-            display: flex;
-            flex-wrap: wrap;
-            height: 160px;
-            line-height: 160px;
-        }
-        p {
-            font-size: 30px;
-            color: $themefontcolor;
-            text-align: center;
-            span {
-                display: inline-block;
-                &:first-child {
-                    margin-top: 66px;
-                }
-                &:last-child {
-                    font-size: 14px;
-                    color: $minorfontcolor;
-                    margin-bottom: 30px;
-                }
-            }
-        }
-        .partner-box {
-            @include flexLayout(space-between, center, row);
-            flex-wrap: wrap;
+        .home-con {
             width: 1180px;
             margin: 0 auto;
-            .partner {
-                width: 179px;
-                height: 79px;
-                @include flexLayout(center, center, row);
+            padding-top: $marginB;
+            background-color: $whitecolor;
+            .home-confirstimg {
+                width: 100%;
+                height: 420px;
+                margin-bottom: $marginB;
+                overflow: hidden;
+                img {
+                    width: 100%;
+                }
+            }
+            .home-conother {
+                width: 100%;
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-between;
+            }
+            .grid-content {
+                width: 580px;
+                height: 326px;
+                margin-bottom: $marginB;
+                overflow: hidden;
+                img {
+                    transition: 0.5s;
+                    width: 100%;
+                    height: 100%;
+                    &:hover {
+                        @include imgChange();
+                    }
+                }
             }
         }
+        .home-footswiper {
+            width: 100%;
+            height: 400px;
+            background-color: #ffffff;
+            .el-carousel__container {
+                width: 902px;
+                height: 240px !important;
+                text-align: center;
+                margin: 0 auto;
+            }
+            .el-carousel__item {
+                width: 902px;
+                display: flex;
+                flex-wrap: wrap;
+                height: 160px;
+                line-height: 160px;
+            }
+            p {
+                font-size: 30px;
+                color: $themefontcolor;
+                text-align: center;
+                span {
+                    display: inline-block;
+                    &:first-child {
+                        margin-top: 66px;
+                    }
+                    &:last-child {
+                        font-size: 14px;
+                        color: $minorfontcolor;
+                        margin-bottom: 30px;
+                    }
+                }
+            }
+            .partner-box {
+                @include flexLayout(space-between, center, row);
+                flex-wrap: wrap;
+                width: 1180px;
+                margin: 0 auto;
+                .partner {
+                    width: 179px;
+                    height: 79px;
+                    @include flexLayout(center, center, row);
+                }
+            }
+        }
+        .checkinput {
+            width: 16px;
+            height: 16px;
+            opacity: 0;
+            position: absolute;
+            top: -3px;
+            left: -3px;
+        }
     }
-    .checkinput {
-        width: 16px;
-        height: 16px;
-        opacity: 0;
-        position: absolute;
-        top: -3px;
-        left: -3px;
-    }
-}
 </style>

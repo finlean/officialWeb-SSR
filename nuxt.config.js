@@ -15,13 +15,26 @@ module.exports = {
                 content: 'width=device-width, initial-scale=1'
             },
             {
+                hid: 'keywords',
+                name: 'keywords',
+                content:
+                    '贷款,成都贷款,小额贷款,个人信用贷款,个人住房抵押贷款,车辆抵押贷款,网上贷款,贷款平台'
+            },
+            {
                 hid: 'description',
                 name: 'description',
-                content: pkg.description
+                content:
+                    '上海吉帑专注于为个人和企业提供各类融资解决方案,个人贷款,小额贷款,银行贷款,汽车贷款,住房贷款,抵押贷款,无抵押贷款和创业贷款等贷款咨询服务'
             }
         ],
-        link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-            { rel: 'stylesheet', href: 'https://cdnjs.cloudflare.com/ajax/libs/element-ui/2.4.7/theme-chalk/index.css' }],
+        link: [
+            { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+            {
+                rel: 'stylesheet',
+                href:
+                    'https://cdnjs.cloudflare.com/ajax/libs/element-ui/2.4.7/theme-chalk/index.css'
+            }
+        ],
         script: [
             {
                 src:

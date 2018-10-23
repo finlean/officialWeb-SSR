@@ -67,13 +67,13 @@
 </template>
 
 <script>
-    import mainHeader from '../components/mainHeader.vue';
-    import mainFooter from '../components/mainFooter.vue';
-    import consultant from '../components/contactConsultant.vue';
-    import api from '../middleware/api';
-    import md5 from 'md5';
-    import statusCodeManage from '../middleware/statusCodeManage';
-    import validate from '../plugins/validator';
+    import mainHeader from '../components/mainHeader.vue'
+    import mainFooter from '../components/mainFooter.vue'
+    import consultant from '../components/contactConsultant.vue'
+    import api from '../middleware/api'
+    import md5 from 'md5'
+    import statusCodeManage from '../middleware/statusCodeManage'
+    import validate from '../plugins/validator'
 
     export default {
         name: 'productDetails',
@@ -97,306 +97,350 @@
                 prodIconContentArr: [],
                 prodInfo: {},
                 prodIntroTextArr: [],
-                applicationRules: [],
-            };
+                applicationRules: []
+            }
+        },
+        head() {
+            return {
+                title: '成都贷款,个人贷款产品,贷款额度高,利率低,放款快-吉帑金服',
+                meta: [
+                    {
+                        hid: 'keywords',
+                        name: 'keywords',
+                        content:
+                            '上海吉帑贷款,上海吉帑金融,上海吉帑金融信息服务有限公司'
+                    },
+                    {
+                        hid: 'description',
+                        name: 'description',
+                        content:
+                            '上海吉帑贷款,上海吉帑金融,上海吉帑金融信息服务有限公司'
+                    }
+                ]
+            }
         },
         methods: {
             getVerCode() {
                 if (!validate.checkPhone(this.userMblNo)) {
-                    this.$message.error('请输入正确的电话号码！');
-                    return;
+                    this.$message.error('请输入正确的电话号码！')
+                    return
                 }
-                this.canNotClickVerCodeBtn = true;
-                let timeOut = 60;
-                this.verCodeText = `60s后重发`;
+                this.canNotClickVerCodeBtn = true
+                let timeOut = 60
+                this.verCodeText = `60s后重发`
                 this.timeOut = setInterval(() => {
                     if (timeOut === 0) {
-                        this.verCodeText = '重发验证码';
-                        clearInterval(this.timeOut);
-                        this.canNotClickVerCodeBtn = false;
+                        this.verCodeText = '重发验证码'
+                        clearInterval(this.timeOut)
+                        this.canNotClickVerCodeBtn = false
                     } else {
-                        timeOut--;
-                        this.verCodeText = `${timeOut}s后重发`;
+                        timeOut--
+                        this.verCodeText = `${timeOut}s后重发`
                     }
-                }, 1000);
-                let anonySign = `jttech_ver_code_sign_75a7_${this.userMblNo}_getVerCode`;
-                api.getVerCode({ mblNo: this.userMblNo, verCodeType: 0, anonySign: md5(anonySign) }).then(
+                }, 1000)
+                let anonySign = `jttech_ver_code_sign_75a7_${
+                    this.userMblNo
+                }_getVerCode`
+                api.getVerCode({
+                    mblNo: this.userMblNo,
+                    verCodeType: 0,
+                    anonySign: md5(anonySign)
+                }).then(
                     res => {
-                        this.$message.success('验证码已发送!');
+                        this.$message.success('验证码已发送!')
                     },
                     err => {
-                        statusCodeManage.showTipOfStatuCode(err, this);
+                        statusCodeManage.showTipOfStatuCode(err, this)
                     }
-                );
+                )
             },
             sendBut() {
-                let area = window.sessionStorage.getItem('position');
+                let area = window.sessionStorage.getItem('position')
                 if (!area) {
-                    this.$alert("定位城市失败！请在上方手动选择城市!", {
-                        confirmButtonText: '确定',
-                    });
-                    return;
+                    this.$alert('定位城市失败！请在上方手动选择城市!', {
+                        confirmButtonText: '确定'
+                    })
+                    return
                 }
-                let reg = /^[\u4e00-\u9fa5]{1,4}$/;
+                let reg = /^[\u4e00-\u9fa5]{1,4}$/
                 if (!reg.test(this.userName)) {
-                    this.$message.error('请输入您的真实姓名！');
-                    return;
+                    this.$message.error('请输入您的真实姓名！')
+                    return
                 }
                 if (!validate.checkPhone(this.userMblNo)) {
-                    this.$message.error('请输入正确的电话号码！');
-                    return;
+                    this.$message.error('请输入正确的电话号码！')
+                    return
                 }
-                let varCodeReg = /^\d{4}$/;
+                let varCodeReg = /^\d{4}$/
                 if (!varCodeReg.test(this.verCode)) {
-                    this.$message.error('请输入正确的验证码！');
-                    return;
+                    this.$message.error('请输入正确的验证码！')
+                    return
                 }
-                this.loadingBtn = true;
+                this.loadingBtn = true
                 let obj = {
                     userName: this.userName,
                     gender: this.gender,
                     userMblNo: this.userMblNo,
                     verCode: this.verCode,
                     prodId: this.prodId
-                };
+                }
                 api.consultManager(obj).then(
                     res => {
-                        this.loadingBtn = false;
-                        this.$confirm('申请成功，稍后贷款顾问会电话与您联系，请保持手机号畅通，谢谢！', '成功', {
-                            confirmButtonText: '确定',
-                            showCancelButton: false,
-                            type: 'success',
-                        });
-                        this.userName = '';
-                        this.gender = '1';
-                        this.userMblNo = '';
-                        this.verCode = '';
-                        clearInterval(this.timeOut);
-                        this.verCodeText = '获取验证码';
-                        this.canNotClickVerCodeBtn = false;
+                        this.loadingBtn = false
+                        this.$confirm(
+                            '申请成功，稍后贷款顾问会电话与您联系，请保持手机号畅通，谢谢！',
+                            '成功',
+                            {
+                                confirmButtonText: '确定',
+                                showCancelButton: false,
+                                type: 'success'
+                            }
+                        )
+                        this.userName = ''
+                        this.gender = '1'
+                        this.userMblNo = ''
+                        this.verCode = ''
+                        clearInterval(this.timeOut)
+                        this.verCodeText = '获取验证码'
+                        this.canNotClickVerCodeBtn = false
                     },
                     err => {
-                        this.loadingBtn = false;
-                        statusCodeManage.showTipOfStatuCode(err, this);
+                        this.loadingBtn = false
+                        statusCodeManage.showTipOfStatuCode(err, this)
                     }
                 )
             },
             //字体图标和标签的组装
             getTags(startArr, endArr) {
-                let iconArr = [], contentArr = [], resultArr = [];
+                let iconArr = [],
+                    contentArr = [],
+                    resultArr = []
                 startArr.forEach((val, index) => {
                     if (index % 2 === 0) {
-                        iconArr.push(val.attrs[0].value);
+                        iconArr.push(val.attrs[0].value)
                     } else {
-                        contentArr.push(val.attrs[0].value);
+                        contentArr.push(val.attrs[0].value)
                     }
-                });
+                })
                 iconArr.forEach((val, index) => {
-                    let obj = {};
-                    obj.icon = val;
-                    obj.content = contentArr[index];
-                    resultArr.push(obj);
-                });
-                console.log(resultArr);
-                this[endArr] = JSON.parse(JSON.stringify(resultArr));
+                    let obj = {}
+                    obj.icon = val
+                    obj.content = contentArr[index]
+                    resultArr.push(obj)
+                })
+                console.log(resultArr)
+                this[endArr] = JSON.parse(JSON.stringify(resultArr))
             },
             //文字内容的组装
             getInfo(startArr, endArr) {
-                let titleArr = [], contentArr = [], resultArr = [];
+                let titleArr = [],
+                    contentArr = [],
+                    resultArr = []
                 startArr.forEach((val, index) => {
                     if (index % 2 === 0) {
-                        titleArr.push(val.attrs[0].value);
+                        titleArr.push(val.attrs[0].value)
                     } else {
-                        contentArr.push(val.attrs[0].value);
+                        contentArr.push(val.attrs[0].value)
                     }
-                });
+                })
                 titleArr.forEach((val, index) => {
-                    resultArr.push(`${val}${contentArr[index]}`);
-                });
-                this[endArr] = JSON.parse(JSON.stringify(resultArr));
+                    resultArr.push(`${val}${contentArr[index]}`)
+                })
+                this[endArr] = JSON.parse(JSON.stringify(resultArr))
             }
         },
         mounted() {
-            this.prodDetailIntroUrl = window.sessionStorage.getItem('prodDetailIntroUrl');
-            this.prodId = window.location.search.slice(1).split('=')[1];
+            this.prodDetailIntroUrl = window.sessionStorage.getItem(
+                'prodDetailIntroUrl'
+            )
+            this.prodId = window.location.search.slice(1).split('=')[1]
             api.prodDetail({ prodId: this.prodId }).then(
                 res => {
-                    this.prodInfo = res.body;
+                    this.prodInfo = res.body
                     //字体图标和描述的组装
-                    this.getTags(res.body.components[0].showEles, 'prodIconContentArr');
+                    this.getTags(
+                        res.body.components[0].showEles,
+                        'prodIconContentArr'
+                    )
                     //产品信息的组装
-                    this.getInfo(res.body.components[1].showEles, 'prodIntroTextArr');
+                    this.getInfo(
+                        res.body.components[1].showEles,
+                        'prodIntroTextArr'
+                    )
                     //申请条件的组装
-                    this.getInfo(res.body.components[2].showEles, 'applicationRules');
+                    this.getInfo(
+                        res.body.components[2].showEles,
+                        'applicationRules'
+                    )
                 },
                 err => {
-                    statusCodeManage.showTipOfStatuCode(err, this);
+                    statusCodeManage.showTipOfStatuCode(err, this)
                 }
             )
         }
-    };
+    }
 </script>
 
 <style lang="scss">
-@import '../assets/iconfont/iconfont.css';
-.productDetails-page {
-    min-height: 800px;
-    padding-top: 90px;
-    .product-container {
-        width: 1180px;
-        margin: 0 auto;
-        @include flexLayout(flex-start, flex-start, row);
-        .product-left {
-            width: 860px;
-            // background-color: $whitecolor;
-            .product-bigloan {
-                width: 100%;
-                font-size: $fontsize24;
-                background-color: $whitecolor;
-                padding: 16px 20px;
-                box-sizing: border-box;
-                border-bottom: solid 1px $divisioncolor;
-            }
-            .product-type {
-                background-color: $whitecolor;
-                @include flexLayout(flex-start, center, row);
-                .product-hexagon {
-                    width: 33.3%;
-                    height: 206px;
-                    @include flexLayout(center, center, column);
-                    p {
-                        margin-top: 10px;
+    @import '../assets/iconfont/iconfont.css';
+    .productDetails-page {
+        min-height: 800px;
+        padding-top: 90px;
+        .product-container {
+            width: 1180px;
+            margin: 0 auto;
+            @include flexLayout(flex-start, flex-start, row);
+            .product-left {
+                width: 860px;
+                // background-color: $whitecolor;
+                .product-bigloan {
+                    width: 100%;
+                    font-size: $fontsize24;
+                    background-color: $whitecolor;
+                    padding: 16px 20px;
+                    box-sizing: border-box;
+                    border-bottom: solid 1px $divisioncolor;
+                }
+                .product-type {
+                    background-color: $whitecolor;
+                    @include flexLayout(flex-start, center, row);
+                    .product-hexagon {
+                        width: 33.3%;
+                        height: 206px;
+                        @include flexLayout(center, center, column);
+                        p {
+                            margin-top: 10px;
+                        }
+                        /*六边形*/
+                        .product-hexagontop {
+                            width: 95px;
+                            height: 110px;
+                            line-height: 110px;
+                            text-align: center;
+                            background-image: url('../assets/img/liu.png');
+                            background-repeat: no-repeat;
+                            i {
+                                font-size: 60px;
+                                color: $whitecolor;
+                            }
+                        }
                     }
-                    /*六边形*/
-                    .product-hexagontop {
-                        width: 95px;
-                        height: 110px;
-                        line-height: 110px;
-                        text-align: center;
-                        background-image: url('../assets/img/liu.png');
-                        background-repeat: no-repeat;
-                        i {
-                            font-size: 60px;
+                }
+                .product-strategy {
+                    @include flexLayout(center, center, row);
+                    width: 100%;
+                    height: 330px;
+                    background-color: $whitecolor;
+                    div {
+                        width: 240px;
+                        .el-input {
+                            height: 36px;
+                            margin-bottom: 20px;
+                            &:first-child {
+                                width: 120px;
+                            }
+                        }
+                        .el-input__inner {
+                            height: 36px;
+                        }
+                        .notecode {
+                            width: 100%;
+                            height: 36px;
+                            margin-bottom: 30px;
+                            .code {
+                                width: 142px;
+                                height: 36px;
+                            }
+                            .getcode {
+                                width: 88px;
+                                padding: 0;
+                                height: 36px;
+                                font-size: $fontsize14;
+                            }
+                        }
+
+                        .el-button {
+                            font-size: $fontsize16;
+                            background-color: $themecolor;
                             color: $whitecolor;
                         }
-                    }
-                }
-            }
-            .product-strategy {
-                @include flexLayout(center, center, row);
-                width: 100%;
-                height: 330px;
-                background-color: $whitecolor;
-                div {
-                    width: 240px;
-                    .el-input {
-                        height: 36px;
-                        margin-bottom: 20px;
-                        &:first-child {
-                            width: 120px;
-                        }
-                    }
-                    .el-input__inner {
-                        height: 36px;
-                    }
-                    .notecode {
-                        width: 100%;
-                        height: 36px;
-                        margin-bottom: 30px;
-                        .code {
-                            width: 142px;
-                            height: 36px;
-                        }
-                        .getcode {
-                            width: 88px;
-                            padding: 0;
-                            height: 36px;
-                            font-size: $fontsize14;
-                        }
-                    }
 
-                    .el-button {
-                        font-size: $fontsize16;
-                        background-color: $themecolor;
-                        color: $whitecolor;
-                    }
-
-                    .onceapply {
-                        width: 100%;
-                        margin-left: 0;
+                        .onceapply {
+                            width: 100%;
+                            margin-left: 0;
+                        }
                     }
                 }
-            }
-            .product-information {
-                width: 100%;
-                margin-top: $marginT;
-                color: $themefontcolor;
-                box-sizing: border-box;
-                background-color: $whitecolor;
-                .product-informationtitle {
-                    height: 46px;
-                    padding: 10px 20px;
-                    line-height: 46px;
-                    margin-top: $marginB;
-                    font-size: $fontsize18;
-                    border-bottom: $borderB;
-                }
-                .product-informationde {
+                .product-information {
                     width: 100%;
-                    padding: 0 20px;
-                    @include flexLayout(center, flex-start, column);
-                    p {
-                        margin-top: 30px;
-                        font-size: $fontsize16;
-                        &:last-child {
-                            margin-bottom: 30px;
+                    margin-top: $marginT;
+                    color: $themefontcolor;
+                    box-sizing: border-box;
+                    background-color: $whitecolor;
+                    .product-informationtitle {
+                        height: 46px;
+                        padding: 10px 20px;
+                        line-height: 46px;
+                        margin-top: $marginB;
+                        font-size: $fontsize18;
+                        border-bottom: $borderB;
+                    }
+                    .product-informationde {
+                        width: 100%;
+                        padding: 0 20px;
+                        @include flexLayout(center, flex-start, column);
+                        p {
+                            margin-top: 30px;
+                            font-size: $fontsize16;
+                            &:last-child {
+                                margin-bottom: 30px;
+                            }
+                        }
+                    }
+                }
+                .product-applyinformation {
+                    width: 100%;
+                    height: 330px;
+                    background-color: $whitecolor;
+                    .product-applytitle {
+                        height: 46px;
+                        padding: 10px 20px;
+                        line-height: 46px;
+                        text-align: left;
+                        font-size: $fontsize18;
+                        border-bottom: $borderB;
+                    }
+                }
+                .product-apply {
+                    width: 100%;
+                    height: 264px;
+                    @include flexLayout(center, center, row);
+                    div {
+                        width: 820px;
+                        height: 240px;
+                        img {
+                            width: 100%;
+                            height: 100%;
                         }
                     }
                 }
             }
-            .product-applyinformation {
-                width: 100%;
-                height: 330px;
-                background-color: $whitecolor;
-                .product-applytitle {
-                    height: 46px;
-                    padding: 10px 20px;
-                    line-height: 46px;
-                    text-align: left;
-                    font-size: $fontsize18;
-                    border-bottom: $borderB;
-                }
-            }
-            .product-apply {
-                width: 100%;
-                height: 264px;
-                @include flexLayout(center, center, row);
-                div {
-                    width: 820px;
-                    height: 240px;
-                    img {
-                        width: 100%;
-                        height: 100%;
-                    }
-                }
-            }
-        }
-        .product-right {
-            width: 300px;
-            height: 320px;
-            margin-left: 20px;
-            .shareBox {
+            .product-right {
                 width: 300px;
-                height: 360px;
-                padding-top: 20px;
-                border-radius: 12px;
-                img {
-                    border-radius: 12px;
+                height: 320px;
+                margin-left: 20px;
+                .shareBox {
                     width: 300px;
-                    height: auto;
+                    height: 360px;
+                    padding-top: 20px;
+                    border-radius: 12px;
+                    img {
+                        border-radius: 12px;
+                        width: 300px;
+                        height: auto;
+                    }
                 }
             }
         }
     }
-}
 </style>

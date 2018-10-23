@@ -63,154 +63,174 @@
 </template>
 
 <script>
-    import mainHeader from '../components/mainHeader.vue';
-    import mainFooter from '../components/mainFooter.vue';
+    import mainHeader from '../components/mainHeader.vue'
+    import mainFooter from '../components/mainFooter.vue'
 
     export default {
         name: 'aboutUs',
         components: {
             mainHeader,
             mainFooter
+        },
+        head() {
+            return {
+                title:
+                    '成都贷款,个人贷款,网上贷款,信用卡申请,贷款一站式金融服务平台-吉帑金服',
+                meta: [
+                    {
+                        hid: 'keywords',
+                        name: 'keywords',
+                        content:
+                            '贷款,成都贷款,小额贷款,个人信用贷款,个人住房抵押贷款,车辆抵押贷款,网上贷款,贷款平台'
+                    },
+                    {
+                        hid: 'description',
+                        name: 'description',
+                        content:
+                            '上海吉帑专注于为个人和企业提供各类融资解决方案,个人贷款,小额贷款,银行贷款,汽车贷款,住房贷款,抵押贷款,无抵押贷款和创业贷款等贷款咨询服务'
+                    }
+                ]
+            }
         }
-    };
+    }
 </script>
 <style lang="scss">
-.aboutus-page {
-    min-height: 800px;
-    .clearbox {
-        @include clearfix();
-    }
-    .aboutus-bnner {
-        margin-top: 60px;
-        min-width: 1200px;
-        height: 240px;
-        background-image: url('../assets/img/abouts.png');
-        position: relative;
-    }
-    .aboutus-introduction {
-        width: 1200px;
-        margin: 0 auto;
-        position: absolute;
-        top: 160px;
-        left: 50%;
-        margin-left: -600px;
-    }
-    .aboutus-con {
-        width: 300px;
-        height: 240px;
-        background-color: #ff6161;
-        float: left;
-        @include flexLayout(center, center, column);
-        span {
-            font-size: $fontsize16;
-            color: $whitecolor;
+    .aboutus-page {
+        min-height: 800px;
+        .clearbox {
+            @include clearfix();
         }
-    }
-    .aboutus-slogan {
-        height: 100px;
-        float: left;
-        color: $whitecolor;
-        margin-left: 30px;
-        margin-bottom: 30px;
-        span {
-            display: inline-block;
-            margin: 30px 0 0 10px;
-            font-size: $fontsize24;
-            position: relative;
-            &:before {
-                content: '';
-                display: inline-block;
-                width: 7px;
-                height: 6px;
-                background-color: $whitecolor;
-                border-radius: 50%;
-                position: absolute;
-                top: 14px;
-                left: -10px;
-            }
-        }
-    }
-    .aboutus-introduce {
-        font-size: $fontsize14;
-        width: 873px;
-        position: absolute;
-        top: 320px;
-        left: 50%;
-        margin-left: -273px;
-        margin-bottom: 37px;
-        p {
-            line-height: 2;
-        }
-        h5 {
-            font-size: $fontsize16;
+        .aboutus-bnner {
             margin-top: 60px;
-            margin-bottom: 5px;
+            min-width: 1200px;
+            height: 240px;
+            background-image: url('../assets/img/abouts.png');
+            position: relative;
         }
-    }
-    .aboutus-show {
-        width: 1200px;
-        margin: 0 auto;
-        margin-top: 335px;
-        @include flexLayout(space-between, center, row);
-        .aboutus-leftshow {
-            width: 800px;
-            @include flexLayout(space-between, center, row);
-            flex-wrap: wrap;
-            div {
-                width: 395px;
-                height: 300px;
-                &:nth-child(1),
-                &:nth-child(2) {
-                    margin-bottom: 10px;
-                }
-                img {
-                    width: 100%;
-                    height: 100%;
+        .aboutus-introduction {
+            width: 1200px;
+            margin: 0 auto;
+            position: absolute;
+            top: 160px;
+            left: 50%;
+            margin-left: -600px;
+        }
+        .aboutus-con {
+            width: 300px;
+            height: 240px;
+            background-color: #ff6161;
+            float: left;
+            @include flexLayout(center, center, column);
+            span {
+                font-size: $fontsize16;
+                color: $whitecolor;
+            }
+        }
+        .aboutus-slogan {
+            height: 100px;
+            float: left;
+            color: $whitecolor;
+            margin-left: 30px;
+            margin-bottom: 30px;
+            span {
+                display: inline-block;
+                margin: 30px 0 0 10px;
+                font-size: $fontsize24;
+                position: relative;
+                &:before {
+                    content: '';
+                    display: inline-block;
+                    width: 7px;
+                    height: 6px;
+                    background-color: $whitecolor;
+                    border-radius: 50%;
+                    position: absolute;
+                    top: 14px;
+                    left: -10px;
                 }
             }
         }
-        .aboutus-rightshow {
-            width: 390px;
-            height: 610px;
-            margin-left: 10px;
-            background-color: $themecolor;
-            div {
-                height: 50%;
-                width: 100%;
-                color: $whitecolor;
-                &:first-child {
-                    @include flexLayout(center, center, column);
-                    p {
-                        font-size: $fontsize24;
-                        margin: 25px 0 10px 0;
-                        span {
-                            display: inline-block;
-                            margin-left: 60px;
-                            position: relative;
-                            &:before {
-                                content: '';
-                                display: inline-block;
-                                width: 8px;
-                                height: 8px;
-                                background-color: $whitecolor;
-                                border-radius: 50%;
-                                position: absolute;
-                                top: 14px;
-                                left: -31px;
-                            }
-                        }
+        .aboutus-introduce {
+            font-size: $fontsize14;
+            width: 873px;
+            position: absolute;
+            top: 320px;
+            left: 50%;
+            margin-left: -273px;
+            margin-bottom: 37px;
+            p {
+                line-height: 2;
+            }
+            h5 {
+                font-size: $fontsize16;
+                margin-top: 60px;
+                margin-bottom: 5px;
+            }
+        }
+        .aboutus-show {
+            width: 1200px;
+            margin: 0 auto;
+            margin-top: 335px;
+            @include flexLayout(space-between, center, row);
+            .aboutus-leftshow {
+                width: 800px;
+                @include flexLayout(space-between, center, row);
+                flex-wrap: wrap;
+                div {
+                    width: 395px;
+                    height: 300px;
+                    &:nth-child(1),
+                    &:nth-child(2) {
+                        margin-bottom: 10px;
                     }
-                }
-                &:last-child {
-                    width: 100%;
-                    height: 50%;
                     img {
                         width: 100%;
                         height: 100%;
                     }
                 }
             }
+            .aboutus-rightshow {
+                width: 390px;
+                height: 610px;
+                margin-left: 10px;
+                background-color: $themecolor;
+                div {
+                    height: 50%;
+                    width: 100%;
+                    color: $whitecolor;
+                    &:first-child {
+                        @include flexLayout(center, center, column);
+                        p {
+                            font-size: $fontsize24;
+                            margin: 25px 0 10px 0;
+                            span {
+                                display: inline-block;
+                                margin-left: 60px;
+                                position: relative;
+                                &:before {
+                                    content: '';
+                                    display: inline-block;
+                                    width: 8px;
+                                    height: 8px;
+                                    background-color: $whitecolor;
+                                    border-radius: 50%;
+                                    position: absolute;
+                                    top: 14px;
+                                    left: -31px;
+                                }
+                            }
+                        }
+                    }
+                    &:last-child {
+                        width: 100%;
+                        height: 50%;
+                        img {
+                            width: 100%;
+                            height: 100%;
+                        }
+                    }
+                }
+            }
         }
     }
-}
 </style>
